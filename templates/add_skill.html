@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+<div class="popup" id="popup">
+          <div class="popup-content">
+              <div class="popup-header">
+                  <span class="close">&times;</span>
+
+              </div>
+              <div class="popup-body">
+                  <form name="form" action="#">
+                    <p>SKILL:</p>  {{ form.Sname }}
+                     <p>PERCENTAGE:</p> {{ form.percentage }}
+                  </form>
+                  <button id="addskill">SUBMIT</button>
+              </div>
+          </div>
+        </div>
+
+<table class="table table-hover">
+              <thead >
+                <tr >
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">SKILL</th>
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">PERCENTAGE</th>
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">ACTIONS</th>
+                </tr>
+              </thead>
+            <tbody id="skill_list">
+
+            </tbody>
+</table>
+<br><br>
+<button type="button" id="add_skill">ADD SKILL</button>
+</body>
+<div id="container" style="width: 75%;">
+    <canvas id="pie-chart"></canvas>
+  </div>
+<button type="button" class="Next" onclick="location.href='{% url "home" %}'">HOME</button>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+            var popup = document.getElementById("popup");
+            var btn = document.getElementById("add_skill");
+            var span = document.getElementsByClassName("close")[0];
+            window.addEventListener('load', function() {
+            popup.style.display = "none";
+            load_skills();
+})
+            btn.onclick = function() {
+                document.getElementById('id_Sname').value = "";
+                document.getElementById('id_percentage').value="";
+              popup.style.display = "block";
+            }
+            span.onclick = function() {
+              popup.style.display = "none";
+            }
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                popup.style.display = "none";
+              }
+            }
+
+            var modal = document.getElementById('popup');
+                window.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
+                function load_skills(){
+   const url = '{% url 'load skill' %}';
+        $.ajax({
+            url: url,
+            success: function (data) {
+                $('#skill_list').html(data);
+
+            }
+        });
+    }
+    $("#addskill").click(function(e){
+        const name = $('#id_Sname').val();
+    const rt = $('#id_percentage').val();
+       const url = '{% url 'submit skill' %}';
+        $.ajax({
+            url: url,
+            data: {
+                'sname': name,
+                'sp': rt,
+            },
+                // beforeSend: function () {
+                // $(".add-popup").addClass('active');
+                // },
+                success: function (data) {
+                    popup.style.display = "none";
+                    $('#skill_list').html(data);
+                }
+        });
+    });
+                var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+          ],
+          label: 'Skills'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+</script>
+</html>

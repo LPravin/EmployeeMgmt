@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <title>
+
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <style>
+   
+       .box{
+           position: absolute;
+           background-image: url("{% static 'image/tech1.jpg' %}");
+           border-image-width: 500px;
+        border:2px solid black;
+        width:600px;
+        height:500px;
+        border-radius:4%;
+        margin-left:200px;
+        margin-top:20px;
+       } 
+    .box1{
+    background-color:white;
+    border:2px solid black;
+    width:600px;
+    height:500px;
+    border-radius:4%;
+    margin-left:200px;
+    margin-top:50px;
+    }
+   .inp{
+       font-family: 'Times New Roman', Times, serif;
+       font-size: 20px;
+       color: black;
+       text-align: center;
+       margin-left: 70px;
+       border-radius: 5%;
+   }
+   .btn{
+       border: 1px;
+       border-radius: 7%;
+       background-color:white ;
+       margin-left: 150px;
+       width:100px;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       font-weight: bold;
+   }
+   img{
+       width:150px;
+       height: 150px;
+       border-radius: 5px;
+       margin-left: 20px;
+    margin-top: 10px;
+       float:left;
+   }
+    </style>
+</head>
+<body>
+  <form method="POST" name="UserForm" action="/home/">
+    {% csrf_token %}
+
+     <div class="box">
+    <div class="box1">
+        <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;text-align: center;color:blue;margin-top: 50px;">
+           Login Page
+        </h1>
+        <div style="background-color: rgb(140, 140, 201);width:400px;height: 300px;margin-left: 100PX;border-radius: 4%; margin-top: 40px;"> 
+<br>
+<br>
+            <input type="text" class="inp" placeholder="Username" name="Username">
+            <br>
+            <br>
+            <input type="password" class="inp" placeholder="Password" name="Password">
+            <br>
+            <br>
+
+            <input type="submit" class="btn" value="Login">
+            <br>
+            <p class = "signup">Manager Signup <a href ={% url 'manager signup' %}>Register Here</a></p>
+            <br>
+            <p class = "signup">Employee Signup <a href ={% url 'employee signup' %}>Register Here</a></p>
+            <br>
+              </div>
+        
+    </div>
+    </div>
+</form>
+</body>
+</html>

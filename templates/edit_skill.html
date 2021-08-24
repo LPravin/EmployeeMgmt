@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDIT SKILL</title>
+</head>
+<body>
+<form method="post" name="skill_edit">
+    {% csrf_token %}
+    <label>
+        <input name="skill" type="text" value="{{ skill.Sname }}">
+    </label>
+    <label>
+        <input name="percentage" type="text" value="{{ skill.percentage }}">
+    </label>
+    <button type="submit">SUBMIT</button>
+</form>
+
+</body>
+</html>

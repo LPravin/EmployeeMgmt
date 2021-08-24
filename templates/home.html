@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<form>
+{% csrf_token %}
+{% if user.is_authenticated %}
+    <p><a href ={% url 'logout' %}>Logout</a></p>
+    <p>Welcome {{ user.username }}</p>
+    {% if request.user.role == 1 %}
+    <a href ={% url 'manage employees' %}>Manage Employees</a>
+        <p><a href ={% url 'employee signup' %}>Add New Employee</a></p>
+    {% elif request.user.role == 2 %}
+    <a href ={% url 'add skill' %}>Profile</a>
+    {% endif %}
+{% else %}
+    <p>please sign-in</p>
+{% endif %}
+</form>
+</body>
+</html>

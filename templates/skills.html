@@ -1,0 +1,15 @@
+{% if skills %}
+{% for s in skills %}
+                <tr>
+                  <td style="text-align: left; padding:20px 8px;"> {{ s.Sname }}</td>
+                  <td style="text-align: left; padding:20px 8px;">{{ s.percentage }}</td>
+                    <td> <button type="button"  onclick="location.href='{% url "edit skill" s.pk %}'">EDIT</button>
+                        <button type="button"  onclick="location.href='{% url "delete skill" s.pk %}'">DELETE</button></td>
+                </tr>
+
+{% endfor %}
+{% else %}
+   <td colspan="9" style="text-align: center;font-size: large;padding:30px;">
+   NO SKILLS
+   </td>
+{% endif %}

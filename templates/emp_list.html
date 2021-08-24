@@ -1,0 +1,29 @@
+<table class="table table-hover">
+              <thead >
+                <tr >
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">FIRST NAME</th>
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">USERNAME</th>
+                  <th scope="col" style="text-align: left; padding:20px 8px;background: #808080; color:#fff;">ACTIONS</th>
+                </tr>
+              </thead>
+            <tbody id="emp_list">
+            {% if list %}
+{% for l in list %}
+                <tr>
+                  <td style="text-align: left; padding:20px 8px;"> {{ l.first_name }}</td>
+                  <td style="text-align: left; padding:20px 8px;">{{ l.username }}</td>
+                    <td>
+{#                        <button type="button"  onclick="location.href='{% url "view skills" l.pk %}'">VIEW PROFILE</button>#}
+                        <button type="button"  onclick="location.href='{% url "view skills" l.pk %}'">VIEW SKILLS</button>
+                        <button type="button"  onclick="location.href='{% url "delete employee" l.pk %}'">DELETE</button></td>
+                </tr>
+
+{% endfor %}
+{% else %}
+   <td colspan="9" style="text-align: center;font-size: large;padding:30px;">
+   NO EMPLOYEES
+   </td>
+{% endif %}
+            </tbody>
+</table>
+ <button type="button"  onclick="location.href='{% url "home" %}'">HOME</button>
